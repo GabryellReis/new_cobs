@@ -1,0 +1,37 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  rid         String   @id
+  name        String
+  sector      String
+  office      String
+  permissions String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now())
+  Bag         Bag[]
+
+  @@map("users")
+}
+
+model Bag {
+  nid       String   @id
+  location  String
+  state     String
+  operation String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+  rid_autor String
+  User      User     @relation(fields: [rid_autor], references: [rid])
+
+  @@map("bags")
+}
