@@ -12,7 +12,7 @@ export async function getAllUsers() {
 
 export async function getUserByRid() {
   try {
-    const data = await instance.get("/user", {rid});
+    const data = await instance.get(`/user/${rid}`);
     return data;
   } catch (error) {
     return {message: error}
