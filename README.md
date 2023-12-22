@@ -10,8 +10,7 @@
   <div>
     <h1>Projeto Full Stack | Aplicativo React Native</h1>
     <h3>Aplicação em React Native</h3>
-    <input type="checkbox" />
-    <span>Backend</span>
+    [x]<span>Backend</span>
   </div>
 </body>
 
