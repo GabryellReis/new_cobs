@@ -1,17 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
+### Projeto Full Stack | Aplicativo React Native
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-
-<body>
-  <div>
-    <h1>Projeto Full Stack | Aplicativo React Native</h1>
-    <h3>Aplicação em React Native</h3>
-    - [x] <span>Backend</span>
-  </div>
-</body>
-
-</html>
+Backend | Tecnologias
+:---------- | :---------- 
+Node JS | :heavy_check_mark:
+Express | :heavy_check_mark:
