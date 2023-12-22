@@ -1,4 +1,4 @@
-import { prisma } from "../../prisma/prismaClient"; 
+import { prisma } from "../../prisma/prismaClient";
 
 export class UserService {
   async getAllUsers() {
@@ -6,8 +6,8 @@ export class UserService {
     return data;
   }
   async getUserByRid(rid: string) {
-    const user = prisma.user.findUnique({where: {rid}})
-    return user
+    const user = prisma.user.findUnique({ where: { rid } });
+    return user;
   }
 
   async registerUser(rid: string, name: string, sector: string, office: string, permissions: string) {
@@ -19,13 +19,13 @@ export class UserService {
         office,
         permissions
       }
-    })
+    });
     return newUser;
   }
 
   async updateUser(rid: string, name: string, sector: string, office: string, permissions: string) {
     const updatedUser = await prisma.user.update({
-      where: {rid},
+      where: { rid },
       data: {
         rid,
         name,
@@ -34,12 +34,12 @@ export class UserService {
         permissions,
         updatedAt: new Date()
       }
-    })
+    });
     return updatedUser;
   }
 
   async deleteUser(rid: string) {
-    const deletedUser = await prisma.user.delete({where: {rid}})
+    const deletedUser = await prisma.user.delete({ where: { rid } });
     return deletedUser;
   }
 }
