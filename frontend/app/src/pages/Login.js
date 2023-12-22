@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useState } from "react";
-import { getAllUsers, getUserByRid } from "../services/requests";
+import {  getUserByRid } from "../services/requests";
 
 export default function Login() {
   const [rid, setRid] = useState("");
