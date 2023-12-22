@@ -4,7 +4,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
 </head>
 
 <body>
@@ -12,7 +11,7 @@
     <h1>Projeto Full Stack | Aplicativo</h1>
     <h3>Aplicação em React Native</h3>
     <input type="checkbox" />
-    <span>Backeend</span>
+    <span>Backend</span>
   </div>
 </body>
 
