@@ -1,12 +1,36 @@
 # Projeto Full Stack | Aplicativo React Native
 
-Backend | Tecnologias | Frontend | Tecnologias
-:---------- | :---------- | :---------- | :---------- 
-Node JS | :heavy_check_mark: | React | :heavy_check_mark:
-Express | :heavy_check_mark: | React Native | :heavy_check_mark:
-Prisma | :heavy_check_mark: | Expo | :heavy_check_mark:
-Jwt | :heavy_check_mark: | Axios | :heavy_check_mark:
+Backend | Tecnologias | Icon | Frontend | Tecnologias | Icon
+:---------- | :---------- | :---------- | :---------- | :---------- | :----------
+NODEJS | :heavy_check_mark: | <img src="https://skills.thijs.gg/icons?i=nodejs" />  | REACT | :heavy_check_mark: | <img src="https://skills.thijs.gg/icons?i=react" />
+EXPRESS | :heavy_check_mark: | <img src="https://skills.thijs.gg/icons?i=express" />  | REACT NATIVE | :heavy_check_mark: | <img src="https://skills.thijs.gg/icons?i=react_native" />
+PRISMA | :heavy_check_mark: | <img src="https://skills.thijs.gg/icons?i=prisma" /> | EXPO | :heavy_check_mark: | <img src="https://skills.thijs.gg/icons?i=expo" />
+JWT | :heavy_check_mark: | <img src="https://skills.thijs.gg/icons?i=jwt" /> | AXIOS | :heavy_check_mark: | <img src="https://skills.thijs.gg/icons?i=axios" />
 
-## Backend
-Projeto realizado com a utilização de NodeJs, fazendo uso do Express para roteamento e gerenciamento de rotas,
-Prisma usado como gerenciador de banco de dados e Jwt para a certificação digital de segurança
+## Realizados
+<details>
+  <summary>
+     Backend
+  </summary><br />
+- <strong>Express:</strong> <br />
+  <ul>
+    <li>✔️ Roteamento do servidor</li>
+    <li>✔️ Gerenciamento de rotas</li>
+  </ul>
+
+  - <strong>Prisma:</strong> <br />
+  <ul>
+    <li>✔️ Criação do banco de dados</li>
+    <li>✔️ Criação de linhas nas tabelas</li>
+    <li>✔️ Requisição de dados</li>
+    <li>✔️ Atualização de campos</li>
+    <li>✔️ Exclusão de elementos</li>
+  </ul>
+</details>
+
+<details>
+  <summary>
+   Frontend
+  </summary><br />
+- <strong>React Native:</strong>
+</details>
