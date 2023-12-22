@@ -8,7 +8,7 @@
 
 <body>
   <div>
-    <h1>Projeto Full Stack | Aplicativo</h1>
+    <h1>Projeto Full Stack | Aplicativo React Native</h1>
     <h3>Aplicação em React Native</h3>
     <input type="checkbox" />
     <span>Backend</span>
