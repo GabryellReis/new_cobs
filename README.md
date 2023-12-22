@@ -10,3 +10,12 @@ Jwt | :heavy_check_mark: | Axios | :heavy_check_mark:
 ## Backend
 Projeto realizado com a utilização de NodeJs, fazendo uso do Express para roteamento e gerenciamento de rotas,
 Prisma usado como gerenciador de banco de dados e Jwt para a certificação digital de segurança
+
+## Realizados
+<details>
+  <summary>
+    Backend
+  - **NodeJS:**
+  </summarry><br />
+
+</details>
