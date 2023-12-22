@@ -1,4 +1,4 @@
-### Projeto Full Stack | Aplicativo React Native
+# Projeto Full Stack | Aplicativo React Native
 
 Backend | Tecnologias | Frontend | Tecnologias
 :---------- | :---------- | :---------- | :---------- 
