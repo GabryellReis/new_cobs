@@ -1,34 +1,48 @@
 import {
-  StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
   View,
-  SafeAreaView,
+  StyleSheet,
 } from "react-native";
+import { getUserByRid } from "../services/requests";
+import { useContext, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
-import { useState } from "react";
-import {  getUserByRid } from "../services/requests";
+import { AuthContext } from "../context/Auth";
 
 export default function Login() {
   const [rid, setRid] = useState("");
-  async function login() {
-   const data = await getUserByRid(rid)
-   console.log(data);
+  const {user, setUser} = useContext(AuthContext)
+
+  const history = useNavigation();
+  async function logOn() {
+    try {
+      const data = await getUserByRid(rid);
+      setUser({
+        id: data.rid,
+        name: data.name,
+        sector: data.sector,
+        office: data.office,
+        permissions: data.permissions,
+      });
+      return history.navigate("home");
+    } catch (error) {
+      return error
+    }
   }
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
+      <Text style={styles.title}>Control Operational {"\n"}Bag Storage</Text>
       <TextInput
-        placeholder="rid"
         keyboardType="numeric"
         style={styles.input}
         onChangeText={(text) => setRid(text)}
       />
-      <TouchableOpacity onPress={login}>
-        <Text>Entrar</Text>
+      <TouchableOpacity style={styles.btnLogin} onPress={logOn}>
+        <Text style={styles.btnLoginText}>Entrar</Text>
       </TouchableOpacity>
-    </SafeAreaView>
+    </View>
   );
 }
 
@@ -39,9 +53,32 @@ const styles = StyleSheet.create({
     alignItems: "center",
     gap: 30,
   },
+  title: {
+    top: -100,
+    fontSize: 20,
+    fontWeight: "600",
+    letterSpacing: 4,
+  },
   input: {
+    borderBottomColor: "#009000",
+    borderWidth: 2,
+    borderStyle: "solid",
     width: 260,
-    borderBottomWidth: 3,
+    borderTopWidth: 0,
+    borderRightWidth: 0,
+    borderLeftWidth: 0,
     textAlign: "center",
+  },
+  btnLogin: {
+    backgroundColor: "#000090",
+    padding: 10,
+    borderRadius: 50,
+    margin: 10,
+    textAlign: "center",
+  },
+  btnLoginText: {
+    color: "#fff",
+    fontSize: 20,
+    letterSpacing: 5,
   },
 });

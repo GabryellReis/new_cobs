@@ -14,7 +14,7 @@ export class UserController {
 
   async getUserByRid(req: Request, res: Response) {
     try {
-      const { rid } = req.params
+      const { rid } = req.body
       const data = await service.getUserByRid(rid)
       return res.status(200).json(data)
     } catch (error) {
