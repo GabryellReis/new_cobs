@@ -25,6 +25,7 @@ export default function Login() {
         office: data.office,
         permissions: data.permissions,
       });
+      console.log(user.permissions);
       return history.navigate("home");
     } catch (error) {
       return error

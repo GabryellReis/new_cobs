@@ -6,16 +6,16 @@ import { FontAwesome } from "@expo/vector-icons";
 export default function Home() {
   const { user } = useContext(AuthContext);
 
-  if (user && user.permissions === "admin") {
+  if (user && user.permissions == "admin") {
     return (
       <View style={styles.container}>
         <Text style={styles.greeting}>Olá, administrador {user.name}</Text>
-        <Text>O que deseja fazer?</Text>
         <View style={styles.options}>
-          <TouchableOpacity>
+        <Text>O que deseja fazer?</Text>
+          <TouchableOpacity style={styles.btn1}>
             <Text>Acessar usuários</Text>
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity style={styles.btn2}>
             <Text>Acessar registros de bags</Text>
           </TouchableOpacity>
         </View>
@@ -24,23 +24,23 @@ export default function Home() {
   }
   return (
     <View style={styles.container}>
-      {/* <Text style={styles.greeting}>Olá, {user.name}</Text> */}
+      <Text style={styles.greeting}>Olá, {user.name}!!</Text>
+      <View style={styles.options}>
       <Text>O que deseja fazer?</Text>
-      <View style={styles.btns}>
-        <TouchableOpacity style={styles.options}>
+        <TouchableOpacity style={styles.btn1}>
           <Text>Consultar Bag(s)</Text>
           <FontAwesome name="shopping-bag" size={40} />
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity style={styles.btn2}>
           <Text>Registrar novo Bag</Text>
           <FontAwesome name="plus-circle" size={40} />
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity style={styles.btn3}>
           <Text>Atualizar Bag</Text>
           <FontAwesome name="toggle-up" size={40} />
         </TouchableOpacity>
-        <TouchableOpacity>
-          <Text>Falar com o Suporte</Text>
+        <TouchableOpacity style={styles.btn4}>
+          <Text>Fale com o Suporte</Text>
           <FontAwesome name="support" size={40} />
         </TouchableOpacity>
       </View>
@@ -54,12 +54,28 @@ const styles = StyleSheet.create({
     marginTop: 60,
     justifyContent: "center",
     alignItems: "center",
-    gap: 30,
   },
   greeting: {
     fontSize: 22,
     fontWeight: "600",
-    letterSpacing: 10,
+    letterSpacing: 8,
     textAlign: "center",
+  },
+  options: {
+    backgroundColor: '#ccc',
+    gap: 30,
+    padding: 30
+  },
+  btn1: {
+    backgroundColor: '#009900'
+  },
+  btn2: {
+    backgroundColor: '#100099'
+  },
+  btn3: {
+    backgroundColor: '#655050'
+  },
+  btn4: {
+    backgroundColor: '#990010'
   },
 });
