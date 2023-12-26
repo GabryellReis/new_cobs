@@ -17,4 +17,4 @@ app.use(express.urlencoded({extended: true}))
 app.use(routes)
 
 
-app.listen(port, '192.168.168.',  () => console.log("SERVER RUNNING IN localhost:3001"))
+app.listen(port, () => console.log("SERVER RUNNING IN localhost:3001"))
