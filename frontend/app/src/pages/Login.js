@@ -25,7 +25,6 @@ export default function Login() {
         office: data.office,
         permissions: data.permissions,
       });
-      console.log(user.permissions);
       return history.navigate("home");
     } catch (error) {
       return error
@@ -43,6 +42,7 @@ export default function Login() {
       <TouchableOpacity style={styles.btnLogin} onPress={logOn}>
         <Text style={styles.btnLoginText}>Entrar</Text>
       </TouchableOpacity>
+      <Text>{user ? user.name : "Nada por aqui"}</Text>
     </View>
   );
 }
