@@ -1,7 +1,8 @@
-import axios from 'axios' 
+import axios from 'axios'
+import 'dotenv/config'
 
 const instance = axios.create({
-  baseURL: 'http://localhost:3001'
+  baseURL: `http://${process.env.EXPO_PUBLIC_HOST}:${process.env.EXPO_PUBLIC_PORT}`
 })
 
 export default instance;

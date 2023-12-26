@@ -33,7 +33,7 @@ export default function Login() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Control Operational {"\n"}Bag Storage</Text>
+      <Text style={styles.title}>Control Operational {"\n"}Bag Storages</Text>
       <TextInput
         keyboardType="numeric"
         style={styles.input}
@@ -42,7 +42,6 @@ export default function Login() {
       <TouchableOpacity style={styles.btnLogin} onPress={logOn}>
         <Text style={styles.btnLoginText}>Entrar</Text>
       </TouchableOpacity>
-      <Text>{user ? user.name : "Nada por aqui"}</Text>
     </View>
   );
 }

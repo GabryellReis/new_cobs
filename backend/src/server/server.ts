@@ -6,7 +6,7 @@ const app = express()
 const port = 3001
 
 const corsOption = {
-  origin: ['http://localhost:8081', 'http://127.0.0.1:8081'],
+  origin: '*',
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE"],
 }
@@ -17,4 +17,4 @@ app.use(express.urlencoded({extended: true}))
 app.use(routes)
 
 
-app.listen(port, () => console.log("SERVER RUNNING IN localhost:3001"))
+app.listen(port, '192.168.168.',  () => console.log("SERVER RUNNING IN localhost:3001"))
