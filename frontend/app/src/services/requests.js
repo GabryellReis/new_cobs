@@ -8,6 +8,7 @@ export async function getAllUsers() {
 
 export async function getUserByRid(rid) {
   const {data} = await instance.post('/user', { rid });
+  console.log(data)
   return data
 }
 
