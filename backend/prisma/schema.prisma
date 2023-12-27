@@ -28,6 +28,7 @@ model Bag {
   location  String
   state     String
   operation String
+  image_url String
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
   rid_autor String
