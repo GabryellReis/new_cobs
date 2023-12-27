@@ -12,12 +12,11 @@ JWT | :heavy_check_mark: | <img src="https://skills.thijs.gg/icons?i=jwt" /> | A
   <summary>
      Backend
   </summary><br />
-- <strong>Express:</strong> <br />
+  - <strong>Express:</strong> <br />
   <ul>
     <li>✔️ Roteamento do servidor</li>
     <li>✔️ Gerenciamento de rotas</li>
   </ul>
-
   - <strong>Prisma:</strong> <br />
   <ul>
     <li>✔️ Criação do banco de dados</li>
