@@ -4,7 +4,6 @@ import Home from "../pages/Home";
 
 import BagConsult from "../pages/BagConsult";
 import BagRegister from "../pages/BagRegister";
-import Loaging from "../components/Loading";
 
 const Stack = createNativeStackNavigator()
 export default function Routes() {
