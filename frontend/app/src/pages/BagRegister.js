@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { SelectList } from 'react-native-dropdown-select-list'
 import { registerBag } from '../services/requests'
@@ -13,6 +13,10 @@ export default function BagRegister() {
   const locacoes = ['GALPÃO 1', 'GALPÃO 2', 'GALPÃO 3']
   const [camType, setCamType] = useState(CameraType)
   const [camRef, setCamRef] = useRef('')
+  const [camPermission, setCamPermissions] = useState()
+  useEffect(() => {
+    setCamPermissions(Camera.getCameraPermissionsAsync)
+  }, [])
 
   async function register() {
     try {
@@ -51,16 +55,16 @@ export default function BagRegister() {
       <View>
         <Camera type={camType} ref={camRef}>
           <View>
-            <TouchableOpacity onPress={camTypeToggle}>
+            <TouchableOpacity onPress={() => camTypeToggle}>
               <MaterialIcons name='switch-camera' sixe={40} />
             </TouchableOpacity>
           </View>
         </Camera>
       </View>
-      <TouchableOpacity onPress={register}>
+      <TouchableOpacity>
         <Text>Tirar foto</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={register}>
+      <TouchableOpacity>
         <Text>Cadastrar Bag</Text>
       </TouchableOpacity>
     </View>

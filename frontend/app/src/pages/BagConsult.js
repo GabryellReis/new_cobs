@@ -25,7 +25,7 @@ export default function BagConsult() {
     <View style={styles.container}>
       <Text style={styles.text}>Insira um NID</Text>
       <TextInput placeholder='NID' onChangeText={newTxt => setNid(newTxt)} />
-      <TouchableOpacity style={styles.searchBtn} onPress={getBagByNid}>
+      <TouchableOpacity style={styles.searchBtn} onPress={() => getBagByNid}>
         <FontAwesome name='search' size={40} />
       </TouchableOpacity>
     </View>

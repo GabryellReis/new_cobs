@@ -37,7 +37,7 @@ export default function Home() {
           <Text>Consultar Bag(s)</Text>
           <FontAwesome name="shopping-bag" size={40} />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.btn2} onPress={() => history.navigate('bags/register')}>
+        <TouchableOpacity style={styles.btn2} onPress={() => history.navigate('bag/register')}>
           <Text>Registrar novo Bag</Text>
           <FontAwesome name="plus-circle" size={40} />
         </TouchableOpacity>
