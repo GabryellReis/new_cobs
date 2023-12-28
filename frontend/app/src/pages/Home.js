@@ -16,7 +16,7 @@ export default function Home() {
       <View style={styles.container}>
         <Text style={styles.greeting}>Olá, administrador {user.name}</Text>
         <View style={styles.options}>
-        <Text>O que deseja fazer?</Text>
+          <Text>O que deseja fazer?</Text>
           <TouchableOpacity style={styles.btn1}>
             <Text>Acessar usuários</Text>
           </TouchableOpacity>
@@ -29,14 +29,29 @@ export default function Home() {
   }
 
 
-  const redirectForBagsConsult = () => history.navigate('bags')
-  const redirectForBagsRegister = () => history.navigate('bag/register')
+  async function redirectForBagsConsult() {
+    try {
+      setLoading(false)
+      history.navigate('bags')
+    } catch (error) {
+      return error
+    }
+  }
+
+  async function redirectForBagsRegister() {
+    try {
+      setLoading(false)
+      history.navigate('bag/register')
+    } catch (error) {
+      return error
+    }
+  }
 
   return (
     <View style={styles.container}>
       {/* <Text style={styles.greeting}>Olá, {user.name}!!</Text> */}
       <View style={styles.options}>
-      <Text>O que deseja fazer?</Text>
+        <Text>O que deseja fazer?</Text>
         <TouchableOpacity style={styles.btn1} onPress={redirectForBagsConsult}>
           <Text>Consultar Bag(s)</Text>
           <FontAwesome name="shopping-bag" size={40} />
