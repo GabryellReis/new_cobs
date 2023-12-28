@@ -2,11 +2,11 @@ import { useState, useContext, useEffect } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { AuthContext } from "../context/Auth";
 import { FontAwesome } from "@expo/vector-icons";
-import { useNavigation, useLinkTo } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 
 export default function Home() {
   const { user, loading, setLoading } = useContext(AuthContext);
-  const history = useLinkTo()
+  const history = useNavigation()
   useEffect(() => {
     setLoading(false)
   }, [])
@@ -32,7 +32,7 @@ export default function Home() {
   async function redirectForBagsConsult() {
     try {
       setLoading(false)
-      history('/bags')
+      return history.navigate('rotateste')
     } catch (error) {
       return error
     }
@@ -41,7 +41,7 @@ export default function Home() {
   async function redirectForBagsRegister() {
     try {
       setLoading(false)
-      history('/bag/register')
+      return history.navigate('bag/register')
     } catch (error) {
       return error
     }

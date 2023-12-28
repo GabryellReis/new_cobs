@@ -1,7 +1,7 @@
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons'
-import { cloneElement, useState } from 'react';
-import instance from '../api/connection'
+import { useState } from 'react';
+// import instance from '../api/connection'
 
 export default function BagConsult() {
   const [nid, setNid] = useState('')
