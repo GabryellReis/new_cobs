@@ -1,8 +1,7 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Login from "../pages/Login";
 import Home from "../pages/Home";
-import {FontAwesome} from '@expo/vector-icons'
-import { View } from "react-native";
+
 import BagConsult from "../pages/BagConsult";
 import BagRegister from "../pages/BagRegister";
 import Loaging from "../components/Loading";
