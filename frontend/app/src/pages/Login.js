@@ -14,8 +14,8 @@ import Loading from "../components/Loading";
 export default function Login() {
   const [rid, setRid] = useState("");
   const { user, setUser, loading, setLoading } = useContext(AuthContext)
-
   const history = useNavigation();
+
   async function logOn() {
     try {
       // const data = await getUserByRid(rid);
