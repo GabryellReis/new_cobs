@@ -3,6 +3,9 @@ import Login from "../pages/Login";
 import Home from "../pages/Home";
 import {FontAwesome} from '@expo/vector-icons'
 import { View } from "react-native";
+import BagConsult from "../pages/BagConsult";
+import BagRegister from "../pages/BagRegister";
+import Loaging from "../components/Loading";
 
 const Stack = createNativeStackNavigator()
 export default function Routes() {
@@ -10,6 +13,8 @@ export default function Routes() {
     <Stack.Navigator>
       <Stack.Screen name="login" component={Login} options={{title: 'COBS'}}/>
       <Stack.Screen name="home" component={Home} options={{title: 'HOME'}}/>
+      <Stack.Screen name="bags" component={BagConsult} options={{title: 'BAGS'}}/>
+      <Stack.Screen name="bag/register" component={BagRegister} options={{title: 'HOME'}}/>
     </Stack.Navigator>
   );
 }

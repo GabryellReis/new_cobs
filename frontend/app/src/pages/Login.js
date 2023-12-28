@@ -9,26 +9,36 @@ import { getUserByRid } from "../services/requests";
 import { useContext, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { AuthContext } from "../context/Auth";
+import Loading from "../components/Loading";
 
 export default function Login() {
   const [rid, setRid] = useState("");
-  const {user, setUser} = useContext(AuthContext)
+  const {user, setUser, loading, setLoading} = useContext(AuthContext)
 
   const history = useNavigation();
   async function logOn() {
     try {
-      const data = await getUserByRid(rid);
-      setUser({
-        id: data.rid,
-        name: data.name,
-        sector: data.sector,
-        office: data.office,
-        permissions: data.permissions,
-      });
+      // const data = await getUserByRid(rid);
+      // setUser({
+      //   id: data.rid,
+      //   name: data.name,
+      //   sector: data.sector,
+      //   office: data.office,
+      //   permissions: data.permissions,
+      // });
+      setLoading(!loading)
       return history.navigate("home");
     } catch (error) {
       return error
     }
+  }
+
+  if (loading) {
+    return(
+      <View>
+        <Loading />
+      </View>
+    )
   }
 
   return (

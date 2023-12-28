@@ -1,10 +1,14 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { AuthContext } from "../context/Auth";
 import { FontAwesome } from "@expo/vector-icons";
 
 export default function Home() {
-  const { user } = useContext(AuthContext);
+  const { user, loading, setLoading } = useContext(AuthContext);
+
+  useEffect(() => {
+    setLoading(false)
+  }, [])
 
   if (user && user.permissions == "admin") {
     return (
@@ -24,7 +28,7 @@ export default function Home() {
   }
   return (
     <View style={styles.container}>
-      <Text style={styles.greeting}>Olá, {user.name}!!</Text>
+      {/* <Text style={styles.greeting}>Olá, {user.name}!!</Text> */}
       <View style={styles.options}>
       <Text>O que deseja fazer?</Text>
         <TouchableOpacity style={styles.btn1}>
