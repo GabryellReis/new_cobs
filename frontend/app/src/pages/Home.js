@@ -31,7 +31,7 @@ export default function Home() {
       {/* <Text style={styles.greeting}>Olá, {user.name}!!</Text> */}
       <View style={styles.options}>
       <Text>O que deseja fazer?</Text>
-        <TouchableOpacity style={styles.btn1}>
+        <TouchableOpacity style={styles.btn1} onPress={() => history.navigate('bags')}>
           <Text>Consultar Bag(s)</Text>
           <FontAwesome name="shopping-bag" size={40} />
         </TouchableOpacity>

@@ -13,7 +13,7 @@ import Loading from "../components/Loading";
 
 export default function Login() {
   const [rid, setRid] = useState("");
-  const {user, setUser, loading, setLoading} = useContext(AuthContext)
+  const { user, setUser, loading, setLoading } = useContext(AuthContext)
 
   const history = useNavigation();
   async function logOn() {
@@ -33,14 +33,6 @@ export default function Login() {
     }
   }
 
-  if (loading) {
-    return(
-      <View>
-        <Loading />
-      </View>
-    )
-  }
-
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Control Operational {"\n"}Bag Storages</Text>
@@ -52,6 +44,7 @@ export default function Login() {
       <TouchableOpacity style={styles.btnLogin} onPress={logOn}>
         <Text style={styles.btnLoginText}>Entrar</Text>
       </TouchableOpacity>
+      {loading && <Loading />}
     </View>
   );
 }
