@@ -26,7 +26,7 @@ export default function Login() {
       //   office: data.office,
       //   permissions: data.permissions,
       // });
-      setLoading(!loading)
+      setLoading(true)
       return history.navigate("home");
     } catch (error) {
       return error
