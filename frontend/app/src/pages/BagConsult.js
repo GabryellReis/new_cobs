@@ -7,25 +7,25 @@ export default function BagConsult() {
   const [nid, setNid] = useState('')
   const [bags, setBags] = useState([])
 
-  async function getBagByNid() {
-    try {
-      if (nid == '') {
-        const { data } = await instance.get('/bags');
-        return setBags(data);
-      }
-      const { data } = await instance.post('/bag', { nid });
-      return setBags(data);
-    } catch (error) {
-      return console.log(error);
-    }
-  }
+  // async function getBagByNid() {
+  //   try {
+  //     if (nid == '') {
+  //       const { data } = await instance.get('/bags');
+  //       return setBags(data);
+  //     }
+  //     const { data } = await instance.post('/bag', { nid });
+  //     return setBags(data);
+  //   } catch (error) {
+  //     return console.log(error);
+  //   }
+  // }
 
 
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Insira um NID</Text>
-      <TextInput placeholder='NID' onChangeText={newTxt => setNid(newTxt)} />
-      <TouchableOpacity style={styles.searchBtn} onPress={() => getBagByNid}>
+      <TextInput placeholder='NID' onChangeText={newTxt => setNid(newTxt)} style={styles.textInput}/>
+      <TouchableOpacity style={styles.searchBtn}>
         <FontAwesome name='search' size={40} />
       </TouchableOpacity>
     </View>

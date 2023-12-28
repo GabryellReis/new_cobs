@@ -18,15 +18,15 @@ export default function BagRegister() {
     setCamPermissions(Camera.getCameraPermissionsAsync)
   }, [])
 
-  async function register() {
-    try {
-      const { nid, state } = bagForm
-      const newBag = await registerBag(nid, location, state, operation, camRef)
-      return newBag
-    } catch (error) {
-      return console.log(error)
-    }
-  }
+  // async function register() {
+  //   try {
+  //     const { nid, state } = bagForm
+  //     const newBag = await registerBag(nid, location, state, operation, camRef)
+  //     return newBag
+  //   } catch (error) {
+  //     return console.log(error)
+  //   }
+  // }
 
   async function camTypeToggle() {
     if (camType == CameraType.back) {
@@ -38,9 +38,9 @@ export default function BagRegister() {
     return;
   }
 
-  async function takeAPicture() {
-    setCamRef(camRef)
-  }
+  // async function takeAPicture() {
+  //   setCamRef(camRef)
+  // }
 
   return (
     <View style={styles.container}>
@@ -55,7 +55,7 @@ export default function BagRegister() {
       <View>
         <Camera type={camType} ref={camRef}>
           <View>
-            <TouchableOpacity onPress={() => camTypeToggle}>
+            <TouchableOpacity onPress={camTypeToggle}>
               <MaterialIcons name='switch-camera' sixe={40} />
             </TouchableOpacity>
           </View>
