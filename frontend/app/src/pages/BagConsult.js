@@ -1,6 +1,6 @@
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons'
-import { useState } from 'react';
+import { cloneElement, useState } from 'react';
 import instance from '../api/connection'
 
 export default function BagConsult() {
@@ -45,7 +45,9 @@ const styles = StyleSheet.create({
     color: '#fff'
   },
   textInput: {
-
+      borderBottomWidth: 2,
+      width: 240,
+      textAlign: 'center'
   },
 
   searchBtn: {

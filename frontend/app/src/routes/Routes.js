@@ -14,7 +14,7 @@ export default function Routes() {
       <Stack.Screen name="login" component={Login} options={{title: 'COBS'}}/>
       <Stack.Screen name="home" component={Home} options={{title: 'HOME'}}/>
       <Stack.Screen name="bags" component={BagConsult} options={{title: 'BAGS'}}/>
-      <Stack.Screen name="bag/register" component={BagRegister} options={{title: 'HOME'}}/>
+      <Stack.Screen name="bag/register" component={BagRegister} options={{title: 'BAGS REGISTER'}}/>
     </Stack.Navigator>
   );
 }
