@@ -11,9 +11,9 @@ export default function BagRegister() {
   const [location, setLocation] = useState('')
   const operacoes = ['ENTRADA', 'SAÍDA']
   const locacoes = ['GALPÃO 1', 'GALPÃO 2', 'GALPÃO 3']
-  const [camType, setCamType] = useState(CameraType)
+  const [camType, setCamType] = useState(CameraType.back)
   const [camRef, setCamRef] = useRef('')
-  const [camPermission, setCamPermissions] = useState()
+  const [camPermission, setCamPermissions] = Camera.useCameraPermissions()
   useEffect(() => {
     setCamPermissions(Camera.getCameraPermissionsAsync)
   }, [])
@@ -29,13 +29,7 @@ export default function BagRegister() {
   // }
 
   async function camTypeToggle() {
-    if (camType == CameraType.back) {
-      return setCamType(CameraType.front)
-    }
-    if (camType == CameraType.front) {
-      return setCamType(CameraType.back)
-    }
-    return;
+    setCamType(current => (current === CameraType.back ? CameraType.front : CameraType.back))
   }
 
   // async function takeAPicture() {
