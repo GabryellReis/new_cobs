@@ -47,11 +47,11 @@ export default function Home() {
       {/* <Text style={styles.greeting}>Olá, {user.name}!!</Text> */}
       <View style={styles.options}>
         <Text>O que deseja fazer?</Text>
-        <TouchableOpacity style={styles.btn1} onPress={() => redirectForBagsConsult()}>
+        <TouchableOpacity style={styles.btn1} onPress={redirectForBagsConsult}>
           <Text>Consultar Bag(s)</Text>
           <FontAwesome name="shopping-bag" size={40} />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.btn2} onPress={() => redirectForBagsRegister()}>
+        <TouchableOpacity style={styles.btn2} onPress={redirectForBagsRegister}>
           <Text>Registrar novo Bag</Text>
           <FontAwesome name="plus-circle" size={40} />
         </TouchableOpacity>

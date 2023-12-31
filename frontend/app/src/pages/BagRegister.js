@@ -7,6 +7,8 @@ import {
   View,
   Modal,
   Image,
+  ScrollView,
+  Button,
 } from "react-native";
 import { SelectList } from "react-native-dropdown-select-list";
 import { registerBag } from "../services/requests";
@@ -22,8 +24,10 @@ export default function BagRegister() {
   const [camType, setCamType] = useState(Camera.Constants.Type.back);
   const [permissions, setPermission] = useState(null);
   const camRef = useRef(null);
-  const [capturadPhoto, setCapturedPhoto] = useState(null);
+  const [capturedPhoto, setCapturedPhoto] = useState(null);
+  const [openCam, setOpenCam] = useState(false);
   const [openModal, setOpenModal] = useState(false);
+  const [photoMemo, setPhotoMemo] = useState(null);
 
   useEffect(() => {
     (async () => {
@@ -53,66 +57,94 @@ export default function BagRegister() {
       setOpenModal(true);
     }
   }
+  function savePhoto() {
+    setPhotoMemo(camRef)
+    setOpenModal(false)
+    setOpenCam(false)
+  }
 
   return (
-    <View style={styles.container}>
-      <Text>NID:</Text>
-      <TextInput
-        placeholder="insira o número de identificação"
-        onChangeText={(text) => setBagForm({ nid: text })}
-        style={styles.input}
-      />
-      <Text>LOCATION:</Text>
-      <SelectList
-        data={locacoes}
-        save="value"
-        setSelected={(val) => setLocation(val)}
-      />
-      <Text>STATE:</Text>
-      <TextInput
-        placeholder="insira as condições do bag"
-        onChangeText={(text) => setBagForm({ state: text })}
-        style={styles.input}
-      />
-      <Text>OPERATION:</Text>
-      <SelectList
-        data={operacoes}
-        save="value"
-        setSelected={(val) => setOperation(val)}
-      />
-      <View>
-        <Camera style={styles.camera} type={camType} ref={camRef}>
-          <TouchableOpacity onPress={() => toggleCam()}>
-            <MaterialIcons
-              name="switch-camera"
-              size={40}
-              style={{ color: "#990000" }}
-            />
-          </TouchableOpacity>
-        </Camera>
-      </View>
-      <TouchableOpacity onPress={() => takePicture()}>
-        <FontAwesome name="camera" size={40} color="#1c2faa" />
-      </TouchableOpacity>
-      {capturadPhoto && (
-        <Modal animationType="slide" transparent={false} visible={openModal}>
-          <View
-            style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
-          >
-            <Image src={capturadPhoto} style={{width: '100%', height: 300, borderRadius: 25}}/>
-            <TouchableOpacity>
-              <FontAwesome name="check" size={35} color="#009900"/>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => setOpenModal(false)}>
-              <FontAwesome name="window-close" size={35} color="#990000"/>
+    <ScrollView>
+      <View style={styles.container}>
+        <Text>NID:</Text>
+        <TextInput
+          keyboardType="numeric"
+          placeholder="insira o número de identificação"
+          onChangeText={(text) => setBagForm({ nid: text })}
+          style={styles.input}
+        />
+        <Text>LOCATION:</Text>
+        <SelectList
+          data={locacoes}
+          save="value"
+          setSelected={(val) => setLocation(val)}
+        />
+        <Text>STATE:</Text>
+        <TextInput
+          placeholder="insira as condições do bag"
+          onChangeText={(text) => setBagForm({ state: text })}
+          style={styles.input}
+        />
+        <Text>OPERATION:</Text>
+        <SelectList
+          data={operacoes}
+          save="value"
+          setSelected={(val) => setOperation(val)}
+        />
+        <Button title="Abrir Camera" onPress={() => setOpenCam(true)} />
+        {photoMemo !== null && <Text>Foto registrada com sucesso!</Text>}
+        {openCam && (
+          <View style={styles.cameraContainer}>
+            <Camera style={styles.camera} type={camType} ref={camRef}>
+              <TouchableOpacity onPress={toggleCam}>
+                <MaterialIcons
+                  name="switch-camera"
+                  size={40}
+                  style={{ color: "#990000" }}
+                />
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => setOpenCam(false)}>
+                <FontAwesome
+                  name="window-close"
+                  size={40}
+                  style={{ color: "#990000" }}
+                />
+              </TouchableOpacity>
+            </Camera>
+            <TouchableOpacity onPress={() => takePicture()}>
+              <FontAwesome name="camera" size={40} color="#1c2faa" />
             </TouchableOpacity>
           </View>
-        </Modal>
-      )}
-      <TouchableOpacity>
-        <Text>Cadastrar Bag</Text>
-      </TouchableOpacity>
-    </View>
+        )}
+
+        {capturedPhoto && (
+          <Modal animationType="slide" transparent={false} visible={openModal}>
+            <View
+              style={{
+                flex: 1,
+                justifyContent: "center",
+                alignItems: "center",
+                marginTop: 50
+              }}
+            >
+              <Image
+                src={capturedPhoto}
+                style={{ width: "99%", height: 600 }}
+              />
+             <View style={{flex: 1, flexDirection: 'row'}}>
+             <TouchableOpacity onPress={savePhoto}>
+                <FontAwesome name="check" size={40} color="#009900" />
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => setOpenModal(false)}>
+                <FontAwesome name="window-close" size={40} color="#990000" />
+              </TouchableOpacity>
+            </View>
+             </View>
+          </Modal>
+        )}
+        <Button title="Cadastrar Bag" />
+      </View>
+    </ScrollView>
   );
 }
 
@@ -122,6 +154,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     gap: 20,
+    marginTop: 20
   },
   input: {
     borderBottomColor: "#009000",
@@ -135,6 +168,13 @@ const styles = StyleSheet.create({
   },
   camera: {
     width: 380,
-    height: 300,
+    height: 600,
+    justifyContent: 'space-between',
+    flexDirection: 'row'
   },
+  cameraContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
 });
