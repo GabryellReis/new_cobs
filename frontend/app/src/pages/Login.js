@@ -13,7 +13,7 @@ import Loading from "../components/Loading";
 
 export default function Login() {
   const [rid, setRid] = useState("");
-  const { user, setUser, loading, setLoading } = useContext(AuthContext)
+  const { user, setUser, loading, setLoading } = useContext(AuthContext);
   const history = useNavigation();
 
   async function logOn() {
@@ -26,10 +26,10 @@ export default function Login() {
       //   office: data.office,
       //   permissions: data.permissions,
       // });
-      setLoading(true)
-      return history.navigate("home");
+      // console.log(data);
+      history.navigate("home");
     } catch (error) {
-      return error
+      return error;
     }
   }
 
@@ -44,7 +44,6 @@ export default function Login() {
       <TouchableOpacity style={styles.btnLogin} onPress={logOn}>
         <Text style={styles.btnLoginText}>Entrar</Text>
       </TouchableOpacity>
-      {loading && <Loading />}
     </View>
   );
 }

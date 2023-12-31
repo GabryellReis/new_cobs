@@ -1,63 +1,114 @@
-import { useState, useRef, useEffect } from 'react';
-import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
-import { SelectList } from 'react-native-dropdown-select-list'
-import { registerBag } from '../services/requests'
-import { Camera, CameraType } from 'expo-camera'
-import { MaterialIcons } from '@expo/vector-icons'
+import { useState, useRef, useEffect } from "react";
+import {
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+  Modal,
+  Image,
+} from "react-native";
+import { SelectList } from "react-native-dropdown-select-list";
+import { registerBag } from "../services/requests";
+import { Camera, CameraType } from "expo-camera";
+import { MaterialIcons, FontAwesome } from "@expo/vector-icons";
 
 export default function BagRegister() {
-  const [bagForm, setBagForm] = useState({ nid: '', state: '' })
-  const [operation, setOperation] = useState('')
-  const [location, setLocation] = useState('')
-  const operacoes = ['ENTRADA', 'SAÍDA']
-  const locacoes = ['GALPÃO 1', 'GALPÃO 2', 'GALPÃO 3']
-  const [camType, setCamType] = useState(CameraType.back)
-  const [camRef, setCamRef] = useRef('')
-  const [camPermission, setCamPermissions] = Camera.useCameraPermissions()
+  const [bagForm, setBagForm] = useState({ nid: "", state: "" });
+  const [operation, setOperation] = useState("");
+  const [location, setLocation] = useState("");
+  const operacoes = ["ENTRADA", "SAÍDA"];
+  const locacoes = ["GALPÃO 1", "GALPÃO 2", "GALPÃO 3"];
+  const [camType, setCamType] = useState(Camera.Constants.Type.back);
+  const [permissions, setPermission] = useState(null);
+  const camRef = useRef(null);
+  const [capturadPhoto, setCapturedPhoto] = useState(null);
+  const [openModal, setOpenModal] = useState(false);
+
   useEffect(() => {
-    setCamPermissions(Camera.getCameraPermissionsAsync)
-  }, [])
+    (async () => {
+      const { status } = await Camera.requestCameraPermissionsAsync();
+      setPermission(status === "granted");
+    })();
+  }, []);
 
-  // async function register() {
-  //   try {
-  //     const { nid, state } = bagForm
-  //     const newBag = await registerBag(nid, location, state, operation, camRef)
-  //     return newBag
-  //   } catch (error) {
-  //     return console.log(error)
-  //   }
-  // }
+  if (permissions === null) return <View />;
+  if (permissions === false)
+    return (
+      <View>
+        <Text>Acesso Negado</Text>
+      </View>
+    );
 
-  async function camTypeToggle() {
-    setCamType(current => (current === CameraType.back ? CameraType.front : CameraType.back))
+  async function toggleCam() {
+    camType === Camera.Constants.Type.back
+      ? setCamType(Camera.Constants.Type.front)
+      : setCamType(Camera.Constants.Type.back);
   }
 
-  // async function takeAPicture() {
-  //   setCamRef(camRef)
-  // }
+  async function takePicture() {
+    if (camRef) {
+      const data = await camRef.current.takePictureAsync();
+      setCapturedPhoto(data.uri);
+      setOpenModal(true);
+    }
+  }
 
   return (
     <View style={styles.container}>
       <Text>NID:</Text>
-      <TextInput placeholder='insira o número de identificação' onChangeText={text => setBagForm({ nid: text })} style={styles.input} />
+      <TextInput
+        placeholder="insira o número de identificação"
+        onChangeText={(text) => setBagForm({ nid: text })}
+        style={styles.input}
+      />
       <Text>LOCATION:</Text>
-      <SelectList data={locacoes} save='value' setSelected={val => setLocation(val)} />
+      <SelectList
+        data={locacoes}
+        save="value"
+        setSelected={(val) => setLocation(val)}
+      />
       <Text>STATE:</Text>
-      <TextInput placeholder='insira as condições do bag' onChangeText={text => setBagForm({ state: text })} style={styles.input} />
+      <TextInput
+        placeholder="insira as condições do bag"
+        onChangeText={(text) => setBagForm({ state: text })}
+        style={styles.input}
+      />
       <Text>OPERATION:</Text>
-      <SelectList data={operacoes} save='value' setSelected={val => setOperation(val)} />
+      <SelectList
+        data={operacoes}
+        save="value"
+        setSelected={(val) => setOperation(val)}
+      />
       <View>
-        <Camera type={camType} ref={camRef}>
-          <View>
-            <TouchableOpacity onPress={camTypeToggle}>
-              <MaterialIcons name='switch-camera' sixe={40} />
-            </TouchableOpacity>
-          </View>
+        <Camera style={styles.camera} type={camType} ref={camRef}>
+          <TouchableOpacity onPress={() => toggleCam()}>
+            <MaterialIcons
+              name="switch-camera"
+              size={40}
+              style={{ color: "#990000" }}
+            />
+          </TouchableOpacity>
         </Camera>
       </View>
-      <TouchableOpacity>
-        <Text>Tirar foto</Text>
+      <TouchableOpacity onPress={() => takePicture()}>
+        <FontAwesome name="camera" size={40} color="#1c2faa" />
       </TouchableOpacity>
+      {capturadPhoto && (
+        <Modal animationType="slide" transparent={false} visible={openModal}>
+          <View
+            style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+          >
+            <Image src={capturadPhoto} style={{width: '100%', height: 300, borderRadius: 25}}/>
+            <TouchableOpacity>
+              <FontAwesome name="check" size={35} color="#009900"/>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => setOpenModal(false)}>
+              <FontAwesome name="window-close" size={35} color="#990000"/>
+            </TouchableOpacity>
+          </View>
+        </Modal>
+      )}
       <TouchableOpacity>
         <Text>Cadastrar Bag</Text>
       </TouchableOpacity>
@@ -68,8 +119,9 @@ export default function BagRegister() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
+    justifyContent: "center",
+    alignItems: "center",
+    gap: 20,
   },
   input: {
     borderBottomColor: "#009000",
@@ -82,8 +134,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   camera: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
-  }
-})
+    width: 380,
+    height: 300,
+  },
+});

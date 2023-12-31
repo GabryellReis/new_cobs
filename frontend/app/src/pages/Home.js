@@ -5,11 +5,8 @@ import { FontAwesome } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 
 export default function Home() {
-  const { user, loading, setLoading } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const history = useNavigation()
-  useEffect(() => {
-    setLoading(false)
-  }, [])
 
   if (user && user.permissions == "admin") {
     return (
@@ -31,7 +28,6 @@ export default function Home() {
 
   async function redirectForBagsConsult() {
     try {
-      setLoading(false)
       return history.navigate('rotateste')
     } catch (error) {
       return error
@@ -40,7 +36,6 @@ export default function Home() {
 
   async function redirectForBagsRegister() {
     try {
-      setLoading(false)
       return history.navigate('bag/register')
     } catch (error) {
       return error
@@ -52,11 +47,11 @@ export default function Home() {
       {/* <Text style={styles.greeting}>Olá, {user.name}!!</Text> */}
       <View style={styles.options}>
         <Text>O que deseja fazer?</Text>
-        <TouchableOpacity style={styles.btn1} onPress={history.navigate('login')}>
+        <TouchableOpacity style={styles.btn1} onPress={() => redirectForBagsConsult()}>
           <Text>Consultar Bag(s)</Text>
           <FontAwesome name="shopping-bag" size={40} />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.btn2} onPress={redirectForBagsConsult}>
+        <TouchableOpacity style={styles.btn2} onPress={() => redirectForBagsRegister()}>
           <Text>Registrar novo Bag</Text>
           <FontAwesome name="plus-circle" size={40} />
         </TouchableOpacity>

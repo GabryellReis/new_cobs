@@ -24,7 +24,7 @@ export default function BagConsult() {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Insira um NID</Text>
-      <TextInput placeholder='NID' onChangeText={newTxt => setNid(newTxt)} style={styles.textInput}/>
+      <TextInput placeholder='NID' keyboardType='numeric' onChangeText={newTxt => setNid(newTxt)} style={styles.textInput}/>
       <TouchableOpacity style={styles.searchBtn}>
         <FontAwesome name='search' size={40} />
       </TouchableOpacity>
@@ -36,20 +36,21 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    gap: 40
   },
   text: {
     fontSize: 20,
     fontWeight: '700',
     letterSpacing: 6,
-    color: '#fff'
+    color: '#990055'
   },
   textInput: {
       borderBottomWidth: 2,
       width: 240,
-      textAlign: 'center'
+      textAlign: 'center',
+      color: '#990054'
   },
-
   searchBtn: {
     borderRadius: 20,
     backgroundColor: "#108099",
