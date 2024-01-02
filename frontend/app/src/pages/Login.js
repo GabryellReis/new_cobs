@@ -20,15 +20,14 @@ export default function Login() {
 
   async function logOn() {
     try {
-      const data = await getUserByRid(rid);
-      setUser({
-        id: data.rid,
-        name: data.name,
-        sector: data.sector,
-        office: data.office,
-        permissions: data.permissions,
-      });
-
+      // const data = await getUserByRid(rid);
+      // setUser({
+      //   id: data.rid,
+      //   name: data.name,
+      //   sector: data.sector,
+      //   office: data.office,
+      //   permissions: data.permissions,
+      // });
       history.navigate("home");
     } catch (error) {
       setScreenError(error.data.message)
