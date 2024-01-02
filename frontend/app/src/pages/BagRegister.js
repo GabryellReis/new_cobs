@@ -19,7 +19,7 @@ export default function BagRegister() {
   const [bagForm, setBagForm] = useState({ nid: "", state: "" });
   const [operation, setOperation] = useState("");
   const [location, setLocation] = useState("");
-  const operacoes = ["ENTRADA", "SAÍDA"];
+  const operacoes = ["ENTRADA", "SAÍDA", "ATUALIZAÇÃO"];
   const locacoes = ["GALPÃO 1", "GALPÃO 2", "GALPÃO 3"];
   const [camType, setCamType] = useState(Camera.Constants.Type.back);
   const [permissions, setPermission] = useState(null);
