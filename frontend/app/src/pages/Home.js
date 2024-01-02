@@ -28,7 +28,7 @@ export default function Home() {
 
   async function redirectForBagsConsult() {
     try {
-      return history.navigate('rotateste')
+      return history.navigate('bags')
     } catch (error) {
       return error
     }

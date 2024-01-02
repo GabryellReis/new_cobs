@@ -12,31 +12,31 @@ export async function getUserByRid(rid) {
 }
 
 export async function createUser(rid, name, setor, cargo, permissions) {
-  const userCreated = await instance.post('/user/register', { rid, name, setor, cargo, permissions })
-  return userCreated;
+  const {data} = await instance.post('/user/register', { rid, name, setor, cargo, permissions })
+  return data;
 }
 
 export async function updateUser(rid, name, setor, cargo, permissions) {
-  const updatedUser = await instance.put(`/user/${rid}`, { rid, name, setor, cargo, permissions });
-  return updatedUser;
+  const {data} = await instance.put(`/user/${rid}`, { rid, name, setor, cargo, permissions });
+  return data;
 }
 
 export async function deleteUser(rid) {
-  const deletedUser = await instance.delete(`/user/${rid}`)
-  return deletedUser;
+  const {data} = await instance.delete(`/user/${rid}`)
+  return data;
 }
 
 export async function getAllBags() {
-  const allBags = await instance.get('/bags')
-  return allBags
+  const {data} = await instance.get('/bags')
+  return data
 }
 
 export async function getBagByNid(nid) {
-  const bag = await instance.get('/bag', {nid})
-  return bag
+  const {data} = await instance.get('/bag', {nid})
+  return data
 }
 
 export async function registerBag(nid, location, state, operation, image_url) {
-  const newBag = await instance.post('/bag/register', {nid, location, state, operation, image_url})
-  return newBag
+  const {data} = await instance.post('/bag/register', {nid, location, state, operation, image_url})
+  return data
 }
