@@ -8,28 +8,28 @@ export class ChatService {
 
   async getAllChatsByRid(rid: string) {
     const data = await prisma.chat.findMany(
-      { where: { user_id: rid } }
+      { where: { id_user: rid } }
     )
   }
 
-  async getChatById(chat_id: string) {
-    const data = await prisma.chat.findUnique({ where: { chat_id } })
+  async getChatById(id_chat: string) {
+    const data = await prisma.chat.findUnique({ where: { id_chat } })
     return data
   }
 
-  async newChatService(user_id: string, agent_id: string) {
+  async newChatService(id_user: string, id_agent: string) {
     const data = await prisma.chat.create({
       data: {
-        user_id,
-        agent_id,
+        id_user,
+        id_agent,
         createdAt: new Date()
       }
     })
     return data
   }
 
-  async deleteChatById(chat_id: string) {
-    const data = await prisma.chat.delete({ where: { chat_id } })
+  async deleteChatById(id_chat: string) {
+    const data = await prisma.chat.delete({ where: { id_chat } })
     return data;
   }
 

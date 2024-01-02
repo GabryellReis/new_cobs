@@ -12,20 +12,26 @@ datasource db {
 
 generator erd {
   provider = "prisma-erd-generator"
-  output = "../ERD.png"
+  output   = "../ERD.png"
 }
 
 model User {
-  rid         String   @id
-  name        String
-  sector      String
-  office      String
+  rid    String @id
+  name   String
+  sector String
+  office String
+
   permissions String   @default("client")
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
-  Bag         Bag[]
-  Chat        Chat[]
-  Ticket      Ticket[]
+
+  Bag Bag[]
+
+  Users  Chat[] @relation("US")
+  Agents Chat[] @relation("AG")
+
+  Sender   Message[] @relation("SenderRelation")
+  Receiver Message[] @relation("ReceiverRelation")
 
   @@map("users")
 }
@@ -45,35 +51,28 @@ model Bag {
 }
 
 model Chat {
-  chat_id   String   @id @default(cuid())
-  user_id   String
-  agent_id  String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id_chat  String @id @default(cuid())
+  id_user  String
+  id_agent String
 
-  User    User      @relation(fields: [user_id], references: [rid])
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @default(now())
+  finishedAt DateTime?
+
+  User    User      @relation("US", fields: [id_user], references: [rid])
+  Agent   User      @relation("AG", fields: [id_agent], references: [rid])
   Message Message[]
-  @@map("chats")
 }
 
 model Message {
-  message_id String   @id @default(cuid())
-  chat_id    String
-  content    String
-  date       DateTime @default(now())
-  type       String
+  id_message  String @id @default(cuid())
+  id_chat     String
+  content     String
+  receiver_id String
+  sender_id   String
 
-  Chat Chat @relation(fields: [chat_id], references: [chat_id])
-  @@map("messages")
-}
+  sender   User @relation("SenderRelation", fields: [sender_id], references: [rid])
+  receiver User @relation("ReceiverRelation", fields: [sender_id], references: [rid])
 
-model Ticket {
-  ticket_id   String   @id @default(cuid())
-  user_id     String
-  subject     String
-  description String
-  createdAt   DateTime @default(now())
-
-  User User @relation(fields: [user_id], references: [rid])
-  @@map("tickets")
+  Chat Chat @relation(fields: [id_chat], references: [id_chat])
 }
