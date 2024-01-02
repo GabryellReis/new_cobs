@@ -1,4 +1,3 @@
-import { resourceUsage } from "process";
 import { prisma } from "../../prisma/prismaClient";
 
 export class BagService {

@@ -12,6 +12,15 @@ export class UserController {
     }
   }
 
+  async getAllSupporters(req: Request, res: Response) {
+    try {
+      const data = await service.getAllSupporters()
+      return res.status(200).json(data)
+    } catch (error) {
+      return res.status(500).json(error)
+    }
+  }
+
   async getUserByRid(req: Request, res: Response) {
     try {
       const { rid } = req.body

@@ -2,12 +2,17 @@ import { prisma } from "../../prisma/prismaClient";
 
 export class UserService {
   async getAllUsers() {
-    const data = prisma.user.findMany()
+    const data = await prisma.user.findMany()
     return data;
   }
   async getUserByRid(rid: string) {
-    const user = prisma.user.findUnique({ where: { rid } });
+    const user = await prisma.user.findUnique({ where: { rid } });
     return user;
+  }
+
+  async getAllSupporters() {
+    const sups = await prisma.user.findMany({where: {permissions: "admin"}})
+    return sups
   }
 
   async registerUser(rid: string, name: string, sector: string, office: string, permissions: string) {

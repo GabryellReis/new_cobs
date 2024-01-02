@@ -10,15 +10,22 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+generator erd {
+  provider = "prisma-erd-generator"
+  output = "../ERD.png"
+}
+
 model User {
   rid         String   @id
   name        String
   sector      String
   office      String
-  permissions String
+  permissions String   @default("client")
   createdAt   DateTime @default(now())
-  updatedAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
   Bag         Bag[]
+  Chat        Chat[]
+  Ticket      Ticket[]
 
   @@map("users")
 }
@@ -30,9 +37,43 @@ model Bag {
   operation String
   image_url String
   createdAt DateTime @default(now())
-  updatedAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
   rid_autor String
   User      User     @relation(fields: [rid_autor], references: [rid])
 
   @@map("bags")
+}
+
+model Chat {
+  chat_id   String   @id @default(cuid())
+  user_id   String
+  agent_id  String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  User    User      @relation(fields: [user_id], references: [rid])
+  Message Message[]
+  @@map("chats")
+}
+
+model Message {
+  message_id String   @id @default(cuid())
+  chat_id    String
+  content    String
+  date       DateTime @default(now())
+  type       String
+
+  Chat Chat @relation(fields: [chat_id], references: [chat_id])
+  @@map("messages")
+}
+
+model Ticket {
+  ticket_id   String   @id @default(cuid())
+  user_id     String
+  subject     String
+  description String
+  createdAt   DateTime @default(now())
+
+  User User @relation(fields: [user_id], references: [rid])
+  @@map("tickets")
 }
