@@ -13,22 +13,26 @@ import Loading from "../components/Loading";
 
 export default function Login() {
   const [rid, setRid] = useState("");
-  const { user, setUser, loading, setLoading } = useContext(AuthContext);
+  const { user, setUser } = useContext(AuthContext);
+  const [failRequest, setFailRequest] = useState(false)
+  const [screenError, setScreenError] = useState(null)
   const history = useNavigation();
 
   async function logOn() {
     try {
-      // const data = await getUserByRid(rid);
-      // setUser({
-      //   id: data.rid,
-      //   name: data.name,
-      //   sector: data.sector,
-      //   office: data.office,
-      //   permissions: data.permissions,
-      // });
-      // console.log(data);
+      const data = await getUserByRid(rid);
+      setUser({
+        id: data.rid,
+        name: data.name,
+        sector: data.sector,
+        office: data.office,
+        permissions: data.permissions,
+      });
+
       history.navigate("home");
     } catch (error) {
+      setScreenError(error.data.message)
+      setFailRequest(true)
       return error;
     }
   }
@@ -44,6 +48,12 @@ export default function Login() {
       <TouchableOpacity style={styles.btnLogin} onPress={logOn}>
         <Text style={styles.btnLoginText}>Entrar</Text>
       </TouchableOpacity>
+      {failRequest &&  (
+        <View>
+          <Text style={{color: "red"}}>Falha na requisição</Text>
+          <Text>{screenError}</Text>
+        </View>
+      )}
     </View>
   );
 }
