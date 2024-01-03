@@ -2,7 +2,15 @@ import { prisma } from "../../prisma/prismaClient";
 
 export class UserService {
   async getAllUsers() {
-    const data = await prisma.user.findMany()
+    const data = await prisma.user.findMany({select: {
+      name: true,
+      rid: true,
+      office: true,
+      sector: true,
+      permissions: true,
+      Sender: true,
+      Receiver: true
+    }})
     return data;
   }
   async getUserByRid(rid: string) {

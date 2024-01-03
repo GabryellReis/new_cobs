@@ -2,14 +2,22 @@ import { prisma } from "../../prisma/prismaClient";
 
 export class ChatService {
   async getAllChats() {
-    const data = await prisma.chat.findMany()
+    const data = await prisma.chat.findMany({ select: { Message: true, createdAt: true, updatedAt: true, id_chat: true } })
     return data
   }
 
   async getAllChatsByRid(rid: string) {
     const data = await prisma.chat.findMany(
-      { where: { id_user: rid } }
+      {
+        where: {
+          OR: [
+            { id_user: rid },
+            { id_agent: rid }
+          ]
+        }
+      }
     )
+    return data
   }
 
   async getChatById(id_chat: string) {

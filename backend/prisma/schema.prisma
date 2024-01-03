@@ -58,6 +58,7 @@ model Chat {
   createdAt  DateTime  @default(now())
   updatedAt  DateTime  @default(now())
   finishedAt DateTime?
+  state      String    @default("openned")
 
   User    User      @relation("US", fields: [id_user], references: [rid])
   Agent   User      @relation("AG", fields: [id_agent], references: [rid])
@@ -70,9 +71,10 @@ model Message {
   content     String
   receiver_id String
   sender_id   String
+  state       String @default("forwarded")
 
   sender   User @relation("SenderRelation", fields: [sender_id], references: [rid])
-  receiver User @relation("ReceiverRelation", fields: [sender_id], references: [rid])
+  receiver User @relation("ReceiverRelation", fields: [receiver_id], references: [rid])
 
   Chat Chat @relation(fields: [id_chat], references: [id_chat])
 }

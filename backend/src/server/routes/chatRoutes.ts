@@ -6,7 +6,7 @@ const controller = new ChatController()
 
 chatRoutes.get('/chats', controller.getAllChats)
 chatRoutes.get('/chats/:rid', controller.getAllChatsByRid)
-chatRoutes.get('/chat/:id', controller.getChatById)
+chatRoutes.post('/chat', controller.getChatById)
 
 chatRoutes.post('/chat/register', controller.newChatController)
 
