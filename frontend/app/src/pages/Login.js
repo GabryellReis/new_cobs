@@ -9,7 +9,6 @@ import { getUserByRid } from "../services/requests";
 import { useContext, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { AuthContext } from "../context/Auth";
-import Loading from "../components/Loading";
 
 export default function Login() {
   const [rid, setRid] = useState("");
