@@ -46,6 +46,11 @@ export async function getChats() {
   return data;
 }
 
+export async function getChatById(id_chat) {
+  const {data} = await instance.post('/chat', {id_chat})
+  return data
+}
+
 export async function getAllChatsByRid(rid) {
   const { data } = await instance.get(`/chats/${rid}`);
   return data
