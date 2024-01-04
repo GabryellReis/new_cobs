@@ -15,8 +15,8 @@ const Stack = createNativeStackNavigator()
 export default function Routes() {
   const history = useNavigation()
 
-  const redirectProfile = () => history.navigate('/profile')
-  const redirectChat = () => history.navigate('/chats')
+  const redirectProfile = () => history.navigate('profile')
+  const redirectChat = () => history.navigate('chats')
 
   // headerRight: () => (
   //   <TouchableOpacity onPress={redirectProfile}>
@@ -33,11 +33,11 @@ export default function Routes() {
       <Stack.Screen name="home" component={Home} options={{
         title: 'HOME', headerLeft: (() => (
           <TouchableOpacity onPress={redirectProfile} >
-            <FontAwesome name="user-circle-o" />
+            <FontAwesome name="user-circle-o" size={40} />
           </TouchableOpacity>
         )), headerRight: (() => (
           <TouchableOpacity onPress={redirectChat}>
-            <FontAwesome name="paper-plane" />
+            <FontAwesome name="paper-plane" size={40} />
           </TouchableOpacity>
         ))
       }} />
