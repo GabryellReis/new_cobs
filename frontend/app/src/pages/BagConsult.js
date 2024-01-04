@@ -7,7 +7,7 @@ import { useNavigation } from '@react-navigation/native';
 export default function BagConsult() {
   const [nid, setNid] = useState(null);
   const [bags, setBags] = useState([]);
-  const history = useNavigation()
+  const history = useNavigation();
 
   async function requestBags() {
     if (nid === null) {
@@ -27,7 +27,7 @@ export default function BagConsult() {
 
   return (
     <ScrollView>
-      <View>
+      <View style={styles.container}>
         <Text style={styles.text}>Insira um NID:</Text>
         <TextInput placeholder='NID:' keyboardType='numeric' onChangeText={(newText) => setNid(newText)} style={styles.textInput} />
         <TouchableOpacity onPress={requestBags}>
@@ -37,7 +37,7 @@ export default function BagConsult() {
         {bags && bags.map((bag) => {
           return (
             <View>
-              <TouchableOpacity onPress={() => redirectByNid(bag.nid)}>
+              <TouchableOpacity onPress={redirectByNid(bag.nid)}>
                 <Text>{bag.nid}</Text>
                 <Text>{bag.location}</Text>
                 <Text>{bag.state}</Text>

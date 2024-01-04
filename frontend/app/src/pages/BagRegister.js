@@ -11,15 +11,14 @@ import {
   Button,
 } from "react-native";
 import { SelectList } from "react-native-dropdown-select-list";
-import { registerBag } from "../services/requests";
-import { Camera, CameraType } from "expo-camera";
+import { Camera } from "expo-camera";
 import { MaterialIcons, FontAwesome } from "@expo/vector-icons";
 
 export default function BagRegister() {
   const [bagForm, setBagForm] = useState({ nid: "", state: "" });
   const [operation, setOperation] = useState("");
   const [location, setLocation] = useState("");
-  const operacoes = ["ENTRADA", "SAÍDA", "ATUALIZAÇÃO"];
+  const operacoes = ["ENTRADA", "SAÍDA"];
   const locacoes = ["GALPÃO 1", "GALPÃO 2", "GALPÃO 3"];
   const [camType, setCamType] = useState(Camera.Constants.Type.back);
   const [permissions, setPermission] = useState(null);
@@ -66,26 +65,26 @@ export default function BagRegister() {
   return (
     <ScrollView>
       <View style={styles.container}>
-        <Text>NID:</Text>
+        <Text>Nº IDENTIFICADOR:</Text>
         <TextInput
           keyboardType="numeric"
-          placeholder="insira o número de identificação"
+          placeholder="NID"
           onChangeText={(text) => setBagForm({ nid: text })}
           style={styles.input}
         />
-        <Text>LOCATION:</Text>
+        <Text>LOCAÇÃO:</Text>
         <SelectList
           data={locacoes}
           save="value"
           setSelected={(val) => setLocation(val)}
         />
-        <Text>STATE:</Text>
+        <Text>ESTADO:</Text>
         <TextInput
-          placeholder="insira as condições do bag"
+          placeholder="DESCRIÇÃO DO BAG"
           onChangeText={(text) => setBagForm({ state: text })}
           style={styles.input}
         />
-        <Text>OPERATION:</Text>
+        <Text>OPERAÇÃO:</Text>
         <SelectList
           data={operacoes}
           save="value"

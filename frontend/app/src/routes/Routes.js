@@ -18,15 +18,6 @@ export default function Routes() {
   const redirectProfile = () => history.navigate('profile')
   const redirectChat = () => history.navigate('chats')
 
-  // headerRight: () => (
-  //   <TouchableOpacity onPress={redirectProfile}>
-  //     <FontAwesome name='user-circle-o' />
-  //   </TouchableOpacity>
-  // ), headerRight: () => (
-  //   <TouchableOpacity onPress={redirectChat}>
-  //     <FontAwesome name='paper-plane' />
-  //   </TouchableOpacity>
-  // ),
   return (
     <Stack.Navigator>
       <Stack.Screen name="login" component={Login} options={{ title: 'COBS' }} />

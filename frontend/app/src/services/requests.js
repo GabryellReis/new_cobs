@@ -55,6 +55,10 @@ export async function getAllChatsByRid(rid) {
   const { data } = await instance.get(`/chats/${rid}`);
   return data
 }
+export async function getAllSups() {
+  const {data} = await instance.get('/users/sups');
+  return data;
+}
 
 export async function getAllMessages() {
   const { data } = await instance.get('/messages');

@@ -59,7 +59,7 @@ export default function Home() {
           <Text>Atualizar Bag</Text>
           <FontAwesome name="toggle-up" size={40} />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.btn4}>
+        <TouchableOpacity style={styles.btn4} onPress={history.navigate('chats')}>
           <Text>Fale com o Suporte</Text>
           <FontAwesome name="support" size={40} />
         </TouchableOpacity>
