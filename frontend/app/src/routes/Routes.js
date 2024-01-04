@@ -8,6 +8,7 @@ import Chats from "../pages/Chats";
 import { TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import CurrentChat from "../pages/CurrentChat";
+import { FontAwesome } from '@expo/vector-icons'
 
 
 const Stack = createNativeStackNavigator()
@@ -29,7 +30,17 @@ export default function Routes() {
   return (
     <Stack.Navigator>
       <Stack.Screen name="login" component={Login} options={{ title: 'COBS' }} />
-      <Stack.Screen name="home" component={Home} options={{ title: 'HOME' }} />
+      <Stack.Screen name="home" component={Home} options={{
+        title: 'HOME', headerLeft: (() => (
+          <TouchableOpacity onPress={redirectProfile} >
+            <FontAwesome name="user-circle-o" />
+          </TouchableOpacity>
+        )), headerRight: (() => (
+          <TouchableOpacity onPress={redirectChat}>
+            <FontAwesome name="paper-plane" />
+          </TouchableOpacity>
+        ))
+      }} />
       <Stack.Screen name="bags" component={BagConsult} options={{ title: 'BAGS' }} />
       <Stack.Screen name="bag/register" component={BagRegister} options={{ title: 'BAGS REGISTER' }} />
       <Stack.Screen name="bag/:id" component={BagDetail} options={{ title: 'BAGS DETAIL' }} />
