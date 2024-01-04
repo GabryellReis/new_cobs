@@ -55,11 +55,11 @@ export default function Home() {
           <Text>Registrar novo Bag</Text>
           <FontAwesome name="plus-circle" size={40} />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.btn3}>
+        <TouchableOpacity style={styles.btn3} onPress={() => history.navigate('bags')}>
           <Text>Atualizar Bag</Text>
           <FontAwesome name="toggle-up" size={40} />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.btn4} onPress={history.navigate('chats')}>
+        <TouchableOpacity style={styles.btn4} onPress={() => history.navigate('chats')}>
           <Text>Fale com o Suporte</Text>
           <FontAwesome name="support" size={40} />
         </TouchableOpacity>

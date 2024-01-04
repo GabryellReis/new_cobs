@@ -4,11 +4,13 @@ import {
   TouchableOpacity,
   View,
   StyleSheet,
+  Image,
 } from "react-native";
 import { getUserByRid } from "../services/requests";
 import { useContext, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { AuthContext } from "../context/Auth";
+import logo from '../../assets/logo.png'
 
 export default function Login() {
   const [rid, setRid] = useState("");
@@ -19,25 +21,32 @@ export default function Login() {
 
   async function logOn() {
     try {
-      // const data = await getUserByRid(rid);
-      // setUser({
-      //   id: data.rid,
-      //   name: data.name,
-      //   sector: data.sector,
-      //   office: data.office,
-      //   permissions: data.permissions,
-      // });
+      const data = await getUserByRid(rid);
+      setUser({
+        id: data.rid,
+        name: data.name,
+        sector: data.sector,
+        office: data.office,
+        permissions: data.permissions,
+      });
       history.navigate("home");
     } catch (error) {
       setScreenError(error.data.message)
       setFailRequest(true)
+      history.navigate("home");
       return error;
     }
   }
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Control Operational {"\n"}Bag Storages</Text>
+      <Text style={styles.title}>
+        Control Operational
+        {"\n"}
+        Bag Storages
+      </Text>
+
+      <Image source={logo} width={200} />
       <TextInput
         keyboardType="numeric"
         style={styles.input}
@@ -46,9 +55,9 @@ export default function Login() {
       <TouchableOpacity style={styles.btnLogin} onPress={logOn}>
         <Text style={styles.btnLoginText}>Entrar</Text>
       </TouchableOpacity>
-      {failRequest &&  (
+      {failRequest && (
         <View>
-          <Text style={{color: "red"}}>Falha na requisição</Text>
+          <Text style={{ color: "red" }}>Falha na requisição</Text>
           <Text>{screenError}</Text>
         </View>
       )}

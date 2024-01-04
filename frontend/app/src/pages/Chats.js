@@ -29,7 +29,10 @@ export default function Chats() {
 
   return (
     <View style={styles.container}>
-      <Text>Recurso ainda não disponível. Aguarde atualizações <Ionicons name='construct' size={25} color={"#2a9d8f"} /></Text>
+      <Text>
+        Recurso ainda não disponível.{"\n"}
+        Estamos trabalhando nisso... <Ionicons name='construct' size={25} color={"#2a9d8f"} />
+      </Text>
     </View>
   )
 
