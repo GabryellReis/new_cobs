@@ -46,7 +46,7 @@ export default function Login() {
         Bag Storages
       </Text>
 
-      <Image source={logo} width={200} />
+      <Image source={logo} style={styles.logo} />
       <TextInput
         keyboardType="numeric"
         style={styles.input}
@@ -100,4 +100,8 @@ const styles = StyleSheet.create({
     fontSize: 20,
     letterSpacing: 5,
   },
+  logo: {
+    width: 100,
+    height: 100
+  }
 });
