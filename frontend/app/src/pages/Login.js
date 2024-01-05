@@ -31,7 +31,7 @@ export default function Login() {
       history.navigate("home");
     } catch (error) {
       setFailRequest(true)
-      return;
+      return error;
     }
   }
 

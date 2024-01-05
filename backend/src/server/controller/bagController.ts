@@ -25,10 +25,12 @@ export class BagController {
 
   async registerBag(req: Request, res: Response) {
     try {
-      const {nid, location, state, operation, image_url} = req.body
-      const {rid_autor} = req.params
-      const data = await service.registerBag(nid, location, state, operation, rid_autor, image_url)
-      return res.status(201).json(data)
+      if (req.file) {
+        const {nid, location, state, operation, rid_author} = req.body
+        const image_url = req.file.destination + req.file.originalname
+        const data = await service.registerBag(nid, location, state, operation, rid_author, image_url)
+        return res.status(201).json(data)
+      }
     } catch (error) {
       return res.status(500).json(error)
     }
@@ -36,8 +38,8 @@ export class BagController {
 
   async updateBag(req: Request, res: Response) {
     try {
-      const {nid, location, state, operation} = req.body
-      const data = await service.updateBag(nid, location, state, operation)
+      const {nid, location, state, operation, image_url} = req.body
+      const data = await service.updateBag(nid, location, state, operation, image_url)
       return res.status(204).json(data)
     } catch (error) {
       return res.status(500).json(error)

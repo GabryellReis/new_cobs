@@ -1,4 +1,4 @@
-import express, { Response } from "express"
+import express, { Request, Response } from "express"
 import { routes } from "./routes"
 import cors from 'cors'
 import https from 'https'
@@ -18,6 +18,7 @@ app.use(cors(corsOption))
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 app.use(routes)
+app.use(express.static('public'))
 
 app.get('/', (req, res) => {
     res.send("Hello, World!!")

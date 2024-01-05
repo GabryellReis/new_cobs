@@ -18,17 +18,17 @@ export class BagService {
         location,
         operation,
         state,
-        rid_autor,
         image_url,
-      }
+        rid_autor
+    }
     });
     return  newBag
   }
 
-  async updateBag(nid: string, location: string, operation: string, state: string) {
+  async updateBag(nid: string, location: string, operation: string, state: string, image_url: string) {
     const updatedBag = await prisma.bag.update({
       where: { nid }, data: {
-        nid, location, operation, state, updatedAt: new Date()
+        nid, location, operation, state, updatedAt: new Date(), image_url
       }
     });
     return updatedBag 
