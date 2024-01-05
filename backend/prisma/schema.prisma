@@ -44,8 +44,8 @@ model Bag {
   image_url String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  rid_autor String
-  User      User     @relation(fields: [rid_autor], references: [rid])
+  rid_author String
+  User      User     @relation(fields: [rid_author], references: [rid])
 
   @@map("bags")
 }

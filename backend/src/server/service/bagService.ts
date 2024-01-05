@@ -11,7 +11,7 @@ export class BagService {
     return data
   }
 
-  async registerBag(nid: string, location: string, operation: string, state: string, rid_autor: string, image_url: string) {
+  async registerBag(nid: string, location: string, operation: string, state: string, rid_author: string, image_url: string) {
     const newBag = await prisma.bag.create({
       data: {
         nid,
@@ -19,7 +19,7 @@ export class BagService {
         operation,
         state,
         image_url,
-        rid_autor
+        rid_author
     }
     });
     return  newBag
