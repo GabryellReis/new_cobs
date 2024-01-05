@@ -44,7 +44,7 @@ export default function Home() {
 
   return (
     <View style={styles.container}>
-      {/* <Text style={styles.greeting}>Olá, {user.name}!!</Text> */}
+      <Text style={styles.greeting}>Olá, {user.name}!!</Text>
       <View style={styles.options}>
         <Text>O que deseja fazer?</Text>
         <TouchableOpacity style={styles.btn1} onPress={redirectForBagsConsult}>

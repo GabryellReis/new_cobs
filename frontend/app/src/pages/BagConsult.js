@@ -37,7 +37,7 @@ export default function BagConsult() {
         {bags && bags.map((bag) => {
           return (
             <View>
-              <TouchableOpacity onPress={redirectByNid(bag.nid)}>
+              <TouchableOpacity onPress={() => redirectByNid(bag.nid)}>
                 <Text>{bag.nid}</Text>
                 <Text>{bag.location}</Text>
                 <Text>{bag.state}</Text>
