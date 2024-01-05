@@ -11,13 +11,11 @@ import { useContext, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { AuthContext } from "../context/Auth";
 import logo from '../../assets/logo.png'
-import instance from "../api/connection";
 
 export default function Login() {
   const [rid, setRid] = useState("");
   const { user, setUser } = useContext(AuthContext);
   const [failRequest, setFailRequest] = useState(false)
-  const [screenError, setScreenError] = useState(null)
   const history = useNavigation();
 
   async function logOn() {
@@ -32,12 +30,8 @@ export default function Login() {
       });
       history.navigate("home");
     } catch (error) {
-      setScreenError(error.data)
-      console.log(screenError);
       setFailRequest(true)
-      console.log(error)
-      // history.navigate("home");
-      return error;
+      return;
     }
   }
 
