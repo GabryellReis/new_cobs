@@ -11,6 +11,7 @@ import { useContext, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { AuthContext } from "../context/Auth";
 import logo from '../../assets/logo.png'
+import instance from "../api/connection";
 
 export default function Login() {
   const [rid, setRid] = useState("");
@@ -21,7 +22,7 @@ export default function Login() {
 
   async function logOn() {
     try {
-      const data = await getUserByRid(rid);
+      const data = await getUserByRid(rid)
       setUser({
         id: data.rid,
         name: data.name,
@@ -31,9 +32,11 @@ export default function Login() {
       });
       history.navigate("home");
     } catch (error) {
-      setScreenError(error.data.message)
+      setScreenError(error.data)
+      console.log(screenError);
       setFailRequest(true)
-      history.navigate("home");
+      console.log(error)
+      // history.navigate("home");
       return error;
     }
   }
@@ -46,9 +49,9 @@ export default function Login() {
         Bag Storages
       </Text>
 
-      <Image source={logo} width={200} />
+      <Image source={logo} style={styles.logo} />
       <TextInput
-        keyboardType="numeric"
+        // keyboardType="numeric"
         style={styles.input}
         onChangeText={(text) => setRid(text)}
       />
@@ -100,4 +103,8 @@ const styles = StyleSheet.create({
     fontSize: 20,
     letterSpacing: 5,
   },
+  logo: {
+    width: 100,
+    height: 100
+  }
 });
