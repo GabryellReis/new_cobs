@@ -45,7 +45,7 @@ export default function Login() {
 
       <Image source={logo} style={styles.logo} />
       <TextInput
-        // keyboardType="numeric"
+        keyboardType="numeric"
         style={styles.input}
         onChangeText={(text) => setRid(text)}
       />
