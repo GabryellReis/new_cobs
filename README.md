@@ -33,3 +33,7 @@ JWT | :heavy_check_mark: | <img src="https://skills.thijs.gg/icons?i=jwt" /> | A
   </summary><br />
 - <strong>React Native:</strong>
 </details>
+
+
+### Notion
+<a href="https://www.notion.so/Back-end-28b1aaa1462444a996d7b798c96a47c4?pvs=4">Acesse</a>
