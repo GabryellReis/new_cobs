@@ -8,8 +8,8 @@ const routes = express()
 
 
 routes.use('/', userRoutes)
-routes.use('/', bagRoutes)
-routes.use('/', chatRoutes)
-routes.use('/', messageRoutes)
+// routes.use('/', bagRoutes)
+// routes.use('/', chatRoutes)
+// routes.use('/', messageRoutes)
 
 export {routes}

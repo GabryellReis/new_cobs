@@ -24,7 +24,7 @@ export default function BagUpdate() {
   
 
  return (
-   <ScrollView>
+   <ScrollView style={styles.container}>
     <TextInput placeholder='busque por um bag' onChangeText={(nid) => setSearchBag(nid)}/>
     <TouchableOpacity onPress={getBag}>
       <MaterialIcons name='search' size={35} />
@@ -42,6 +42,8 @@ export default function BagUpdate() {
 
 const styles = StyleSheet.create({
   container: {
-
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 })

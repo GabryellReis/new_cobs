@@ -2,59 +2,51 @@ import { prisma } from "../../prisma/prismaClient";
 
 export class UserService {
   async getAllUsers() {
-    const data = await prisma.user.findMany({select: {
-      name: true,
-      rid: true,
-      office: true,
-      sector: true,
-      permissions: true,
-      Sender: true,
-      Receiver: true
-    }})
+    const data = await prisma.cliente.findMany()
     return data;
   }
-  async getUserByRid(rid: string) {
-    const user = await prisma.user.findUnique({ where: { rid } });
-    console.log(user);
+  // async getUserByRid(rid: string) {
+  //   const user = await prisma.user.findUnique({ where: { rid } });
+  //   console.log(user);
     
-    return user;
-  }
+  //   return user;
+  // }
 
-  async getAllSupporters() {
-    const sups = await prisma.user.findMany({where: {permissions: "admin"}})
-    return sups
-  }
+  // async getAllSupporters() {
+  //   const sups = await prisma.user.findMany({where: {permissions: "admin"}})
+  //   return sups
+  // }
 
-  async registerUser(rid: string, name: string, sector: string, office: string, permissions: string) {
-    const newUser = await prisma.user.create({
-      data: {
-        rid,
-        name,
-        sector,
-        office,
-        permissions
-      }
-    });
-    return newUser;
-  }
+  // async registerUser(rid: string, name: string, sector: string, office: string, permissions: string) {
+  //   const newUser = await prisma.user.create({
+  //     data: {
+  //       rid,
+  //       name,
+  //       sector,
+  //       office,
+  //       permissions
+  //     }
+  //   });
+  //   return newUser;
+  // }
 
-  async updateUser(rid: string, name: string, sector: string, office: string, permissions: string) {
-    const updatedUser = await prisma.user.update({
-      where: { rid },
-      data: {
-        rid,
-        name,
-        sector,
-        office,
-        permissions,
-        updatedAt: new Date()
-      }
-    });
-    return updatedUser;
-  }
+  // async updateUser(rid: string, name: string, sector: string, office: string, permissions: string) {
+  //   const updatedUser = await prisma.user.update({
+  //     where: { rid },
+  //     data: {
+  //       rid,
+  //       name,
+  //       sector,
+  //       office,
+  //       permissions,
+  //       updatedAt: new Date()
+  //     }
+  //   });
+  //   return updatedUser;
+  // }
 
-  async deleteUser(rid: string) {
-    const deletedUser = await prisma.user.delete({ where: { rid } });
-    return deletedUser;
-  }
+  // async deleteUser(rid: string) {
+  //   const deletedUser = await prisma.user.delete({ where: { rid } });
+  //   return deletedUser;
+  // }
 }
