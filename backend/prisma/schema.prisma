@@ -10,28 +10,126 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  rid         String   @id
-  name        String
-  sector      String
-  office      String
-  permissions String
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @default(now())
-  Bag         Bag[]
-
-  @@map("users")
+generator erd {
+  provider = "prisma-erd-generator"
+  output   = "../ERD.png"
 }
 
-model Bag {
-  nid       String   @id
-  location  String
-  state     String
-  operation String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now())
-  rid_autor String
-  User      User     @relation(fields: [rid_autor], references: [rid])
+// model User {
+//   rid    String @id
+//   name   String
+//   sector String
+//   office String
 
-  @@map("bags")
+//   permissions String   @default("client")
+//   createdAt   DateTime @default(now())
+//   updatedAt   DateTime @updatedAt
+
+//   Bag Bag[]
+
+//   Users  Chat[] @relation("US")
+//   Agents Chat[] @relation("AG")
+
+//   Sender   Message[] @relation("SenderRelation")
+//   Receiver Message[] @relation("ReceiverRelation")
+
+//   @@map("users")
+// }
+
+// model Bag {
+//   nid        String   @id @default(dbgenerated())
+//   location   String
+//   state      String
+//   operation  String
+//   image_url  String
+//   createdAt  DateTime @default(now())
+//   updatedAt  DateTime @updatedAt
+//   rid_author String
+//   User       User     @relation(fields: [rid_author], references: [rid])
+
+//   @@map("bags")
+// }
+
+// model Chat {
+//   id_chat  String @id @default(cuid())
+//   id_user  String
+//   id_agent String
+
+//   createdAt  DateTime  @default(now())
+//   updatedAt  DateTime  @default(now())
+//   finishedAt DateTime?
+//   state      String    @default("openned")
+
+//   User    User      @relation("US", fields: [id_user], references: [rid])
+//   Agent   User      @relation("AG", fields: [id_agent], references: [rid])
+//   Message Message[]
+// }
+
+// model Message {
+//   id_message  String @id @default(cuid())
+//   id_chat     String
+//   content     String
+//   receiver_id String
+//   sender_id   String
+//   state       String @default("forwarded")
+
+//   sender   User @relation("SenderRelation", fields: [sender_id], references: [rid])
+//   receiver User @relation("ReceiverRelation", fields: [receiver_id], references: [rid])
+
+//   Chat Chat @relation(fields: [id_chat], references: [id_chat])
+// }
+
+model Ocorrencia {
+  id              Int      @id @default(autoincrement())
+  dt_nf           DateTime
+  dt_entrada      DateTime @default(now())
+  dt_saida        DateTime @updatedAt
+  terceiro        Int?
+  total_bags      Int
+  total_avariados Int?     @default(0)
+  observacao      String
+
+  Avariados      Avariado[]
+  ref_transporte String
+  Transporte     Transporte @relation(fields: [ref_transporte], references: [placa_veiculo])
+
+  @@map("ocorrencias")
+}
+
+model Avariado {
+  id          Int    @id @default(autoincrement())
+  lote        String
+  tipo        String // r.fundo, r.alca, r.corpo, r.boca, mofo
+  sujidade    String
+  foto_avaria String
+
+  id_ocorrencia Int
+  Ocorrencia    Ocorrencia @relation(fields: [id_ocorrencia], references: [id])
+
+  @@map("avariados")
+}
+
+model Cliente {
+  codigo       Int          @id
+  nome         String
+  cidade       String
+  estado       String
+  cnpj         String       @unique
+  razao_social String
+  Transporte   Transporte[]
+
+  @@map("clientes")
+}
+
+model Transporte {
+  placa_veiculo        String       @id
+  nome_motorista       String
+  cpf                  String
+  cnh                  String
+  assinatura_motorista String
+  ref_cliente          Int
+  Cliente              Cliente      @relation(fields: [ref_cliente], references: [codigo])
+  Ocorrencia           Ocorrencia[]
+
+  @@map("transportes")
 }
