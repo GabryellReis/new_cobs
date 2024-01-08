@@ -7,6 +7,7 @@ interface IOcorrencia {
   total_bags: number | 0
   total_avariados: number | 0
   observacao: string
+  ref_transporte: string
 }
 
 export default IOcorrencia;
