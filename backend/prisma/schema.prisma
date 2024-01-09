@@ -15,6 +15,17 @@ generator erd {
   output   = "../ERD.png"
 }
 
+model Usuario {
+  rid        String       @id
+  nome       String
+  setor      String
+  cargo      String
+  permissoes String
+  Ocorrencia Ocorrencia[]
+
+  @@map("usuarios")
+}
+
 model Ocorrencia {
   id              Int      @id @default(autoincrement())
   dt_nf           DateTime
@@ -28,6 +39,8 @@ model Ocorrencia {
   Avariados      Avariado[]
   ref_transporte String
   Transporte     Transporte @relation(fields: [ref_transporte], references: [placa_veiculo])
+  rid            String
+  Usuario        Usuario    @relation(fields: [rid], references: [rid])
 
   @@map("ocorrencias")
 }

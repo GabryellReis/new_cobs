@@ -10,27 +10,28 @@ import { getUserByRid } from "../services/requests";
 import { useContext, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { AuthContext } from "../context/Auth";
-import logo from '../../assets/logo.png'
+import logo from "../../assets/logo.png";
 
 export default function Login() {
-  const [rid, setRid] = useState("");
-  const { user, setUser } = useContext(AuthContext);
-  const [failRequest, setFailRequest] = useState(false)
+  const [rid, setRid] = useState();
+  const { setUser } = useContext(AuthContext);
+  const [failRequest, setFailRequest] = useState(false);
   const history = useNavigation();
 
   async function logOn() {
     try {
-      const data = await getUserByRid(rid)
+      const data = await getUserByRid(rid);
+      console.log(data);
       setUser({
         id: data.rid,
-        name: data.name,
-        sector: data.sector,
-        office: data.office,
-        permissions: data.permissions,
+        name: data.nome,
+        sector: data.setor,
+        office: data.cargo,
+        permissions: data.permissoes,
       });
       history.navigate("home");
     } catch (error) {
-      setFailRequest(true)
+      setFailRequest(true);
       return error;
     }
   }
@@ -44,18 +45,13 @@ export default function Login() {
       </Text>
 
       <Image source={logo} style={styles.logo} />
-      <TextInput
-        keyboardType="numeric"
-        style={styles.input}
-        onChangeText={(text) => setRid(text)}
-      />
+      <TextInput style={styles.input} onChangeText={(text) => setRid(text)} />
       <TouchableOpacity style={styles.btnLogin} onPress={logOn}>
         <Text style={styles.btnLoginText}>Entrar</Text>
       </TouchableOpacity>
       {failRequest && (
         <View>
           <Text style={{ color: "red" }}>Falha na requisição</Text>
-          <Text>{screenError}</Text>
         </View>
       )}
     </View>
@@ -99,6 +95,6 @@ const styles = StyleSheet.create({
   },
   logo: {
     width: 100,
-    height: 100
-  }
+    height: 100,
+  },
 });

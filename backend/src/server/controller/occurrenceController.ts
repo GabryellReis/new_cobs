@@ -23,12 +23,12 @@ export class OccurrenceController {
     }
   }
 
-  async createNewOccurrence(req: Request, res: Response) {
-    try {
-      const data = await service.createNewOccurrence()
-      return res.status(201).json(data)
-    } catch (error) {
-      return res.status(500).json(error)
-    }
-  }
+  // async createNewOccurrence(req: Request, res: Response) {
+  //   try {
+  //     const data = await service.createNewOccurrence()
+  //     return res.status(201).json(data)
+  //   } catch (error) {
+  //     return res.status(500).json(error)
+  //   }
+  // }
 }
