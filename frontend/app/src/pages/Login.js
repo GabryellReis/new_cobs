@@ -6,7 +6,7 @@ import {
   StyleSheet,
   Image,
 } from "react-native";
-import { getUserByRid } from "../services/requests";
+import {  getUserByRid } from "../services/requests";
 import { useContext, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { AuthContext } from "../context/Auth";
@@ -21,7 +21,7 @@ export default function Login() {
   async function logOn() {
     try {
       const data = await getUserByRid(rid);
-      console.log(data);
+
       setUser({
         id: data.rid,
         name: data.nome,
@@ -32,6 +32,7 @@ export default function Login() {
       history.navigate("home");
     } catch (error) {
       setFailRequest(true);
+      console.error(error);
       return error;
     }
   }
@@ -45,7 +46,7 @@ export default function Login() {
       </Text>
 
       <Image source={logo} style={styles.logo} />
-      <TextInput style={styles.input} onChangeText={(text) => setRid(text)} />
+      <TextInput style={styles.input} onChangeText={(text) => setRid(text)} keyboardType="numeric"/>
       <TouchableOpacity style={styles.btnLogin} onPress={logOn}>
         <Text style={styles.btnLoginText}>Entrar</Text>
       </TouchableOpacity>
